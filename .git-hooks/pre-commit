@@ -1,0 +1,19 @@
+#!/bin/sh
+
+
+# prettier
+FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$FILES" ] && exit 0
+
+echo "$FILES" | xargs ./node_modules/.bin/prettier --write --ignore-unknown || {
+  echo "[pre-commit] Prettier failed"
+  exit 1
+}
+echo "$FILES" | xargs git add
+
+if ! npm run lint; then
+  echo "[pre-commit] Lint failed"
+  exit 1
+fi
+
+echo "[pre-commit] hook passed"

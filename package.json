@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint",
-    "format": "prettier --write . --ignore-unknown"
+    "format": "prettier --write . --ignore-unknown",
+    "prepare": "chmod +x .git-hooks/* && git config core.hooksPath .git-hooks"
   },
   "dependencies": {
     "astro": "^7.0.6"
